@@ -19,7 +19,6 @@ namespace MEF_OpenGenericTester
             Console.WriteLine("Registering types from this assembly");
             // Register our own type
             var thisProgramCatalog = new TypeCatalog(typeof(Runner));
-            var locatorCatalog = new TypeCatalog(typeof(PersonModuleHints));
             var commonCatalog = new AssemblyCatalog(typeof(ServiceLocator).Assembly);
 
             // Register the new modules
@@ -28,7 +27,7 @@ namespace MEF_OpenGenericTester
             var myCustomerModuleCatalog = new AssemblyCatalog(typeof(CustomerRepository).Assembly);
 
             // Aggregate all catalogs and create a container from them
-            var aggrContainer = new AggregateCatalog(thisProgramCatalog, locatorCatalog, commonCatalog, myPersonModuleCatalog, myCustomerModuleCatalog);
+            var aggrContainer = new AggregateCatalog(thisProgramCatalog, commonCatalog, myPersonModuleCatalog, myCustomerModuleCatalog);
             var container = new CompositionContainer(aggrContainer);
 
             // Have MEF create an instance of the runner and inject the dependencies.
